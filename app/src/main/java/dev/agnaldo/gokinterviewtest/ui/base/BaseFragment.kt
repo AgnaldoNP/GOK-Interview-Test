@@ -20,7 +20,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViewModel(savedInstanceState)
 
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
@@ -31,7 +30,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
-    @ExperimentalStdlibApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +39,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         viewDataBinding = this
         bindViewModelToBinding()
         viewModel.observableEvents.observe(viewLifecycleOwner, observableViewModelEvents)
+        initViewModel(savedInstanceState)
     }.root
 
     open fun onBackPressed() {

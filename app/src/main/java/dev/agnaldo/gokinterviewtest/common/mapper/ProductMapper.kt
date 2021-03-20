@@ -9,3 +9,7 @@ fun ProductsResponse.ProductResponse.toDBEntity() =
         imageURL = this.imageURL,
         description = this.description
     )
+
+fun List<ProductsResponse.ProductResponse>.toDBEntities() = this.map {
+    it.toDBEntity()
+}

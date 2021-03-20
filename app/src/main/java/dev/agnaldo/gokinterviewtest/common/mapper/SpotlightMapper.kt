@@ -9,3 +9,7 @@ fun ProductsResponse.SpotlightResponse.toDBEntity() =
         bannerURL = this.bannerURL,
         description = this.description
     )
+
+fun List<ProductsResponse.SpotlightResponse>.toDBEntities() = this.map {
+    it.toDBEntity()
+}

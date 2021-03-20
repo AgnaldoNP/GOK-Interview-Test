@@ -84,6 +84,8 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha09"
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     def koin_version = "2.2.2"
     implementation "org.koin:koin-core:$koin_version"

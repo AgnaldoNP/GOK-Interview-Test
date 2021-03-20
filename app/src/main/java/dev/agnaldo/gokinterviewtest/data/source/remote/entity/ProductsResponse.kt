@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductsResponse(
     @SerializedName("spotlight")
-    val spotlight: List<SpotlightResponse>,
+    val spotlights: List<SpotlightResponse>,
 
     @SerializedName("products")
     val products: List<ProductResponse>,

@@ -22,4 +22,12 @@ abstract class DaoCash : DaoBase<CashDBEntity> {
     )
     suspend abstract fun getById(id: Long): CashDBEntity?
 
+    @Query(
+        """
+            SELECT COUNT(*) = 0 FROM '${CashDBEntity.TABLE_NAME}'
+            
+        """
+    )
+    abstract fun hasCashData(): Boolean
+
 }
