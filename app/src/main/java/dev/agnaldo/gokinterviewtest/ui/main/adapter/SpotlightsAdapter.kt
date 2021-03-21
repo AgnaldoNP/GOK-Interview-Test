@@ -6,10 +6,11 @@ import androidx.databinding.DataBindingUtil
 import dev.agnaldo.gokinterviewtest.R
 import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
 import dev.agnaldo.gokinterviewtest.ui.base.BaseListAdapter
-import dev.agnaldo.gokinterviewtest.ui.main.adapter.viewhoolder.SpotlightViewHolder
+import dev.agnaldo.gokinterviewtest.ui.main.adapter.viewholder.SpotlightViewHolder
 
 class SpotlightsAdapter(
-    private val spotlights: List<Spotlight>
+    private val spotlights: List<Spotlight>,
+    private val onSpotLightClick: (Spotlight) -> Unit
 ) : BaseListAdapter<Spotlight, SpotlightViewHolder>(spotlights) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SpotlightViewHolder(
@@ -19,7 +20,7 @@ class SpotlightsAdapter(
     )
 
     override fun onBindViewHolder(holder: SpotlightViewHolder, position: Int) {
-        holder.bind(spotlights[position])
+        holder.bind(spotlights[position], onSpotLightClick)
     }
 
 }

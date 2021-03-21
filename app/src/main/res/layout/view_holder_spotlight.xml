@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="spotlight"
-            type="dev.agnaldo.gokinterviewtest.domian.entity.Spotlight" />
+            name="presentation"
+            type="dev.agnaldo.gokinterviewtest.ui.main.adapter.viewholder.SpotlightViewHolder.Presentation" />
 
     </data>
 
@@ -13,7 +13,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:onClick="@{() -> presentation.onClick()}">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -28,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spotlight_image_height"
                 android:scaleType="centerCrop"
-                app:src="@{spotlight.bannerURL}"
+                app:src="@{presentation.spotlight.bannerURL}"
                 tools:src="@mipmap/ic_launcher" />
 
         </androidx.cardview.widget.CardView>

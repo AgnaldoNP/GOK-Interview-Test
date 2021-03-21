@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="product"
-            type="dev.agnaldo.gokinterviewtest.domian.entity.Product" />
+            name="presentation"
+            type="dev.agnaldo.gokinterviewtest.ui.main.adapter.viewholder.ProductViewHolder.Presentation" />
 
     </data>
 
@@ -14,6 +14,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:onClick="@{() -> presentation.onClick()}"
         app:cardBackgroundColor="@null"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
@@ -25,7 +26,7 @@
             android:layout_gravity="center"
             android:padding="16dp"
             android:scaleType="centerCrop"
-            app:src="@{product.imageURL}"
+            app:src="@{presentation.product.imageURL}"
             tools:src="@mipmap/ic_launcher" />
 
     </androidx.cardview.widget.CardView>

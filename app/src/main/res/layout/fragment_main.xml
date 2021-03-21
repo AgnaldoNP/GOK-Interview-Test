@@ -92,6 +92,7 @@
                     android:layout_height="@dimen/cash_image_height"
                     android:layout_marginHorizontal="32dp"
                     android:layout_marginTop="8dp"
+                    android:onClick="@{() -> presentation.onCashClick.invoke()}"
                     android:scaleType="fitCenter"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

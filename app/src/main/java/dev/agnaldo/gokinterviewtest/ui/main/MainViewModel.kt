@@ -49,25 +49,46 @@ class MainViewModel(
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
                 }
-            }
+            },
+            onCashClick = { onCashClick(cash) }
         )
     }
 
-    private fun getPresentation() = presentation.value ?: Presentation()
-
     fun onSpotlightsChange(spotlights: List<Spotlight>) {
-        val adapter = SpotlightsAdapter(spotlights)
+        val adapter = SpotlightsAdapter(
+            spotlights = spotlights,
+            onSpotLightClick = { onSpotlightClick(it) }
+        )
+
         _presentation.value = getPresentation().copy(
             spotlightsAdapter = adapter
         )
     }
 
     fun onProductsChange(products: List<Product>) {
-        val adapter = ProductsAdapter(products)
+        val adapter = ProductsAdapter(
+            products = products,
+            onProductClick = { onProductClick(it) }
+        )
+
         _presentation.value = getPresentation().copy(
             productsAdapter = adapter
         )
     }
+
+    private fun onSpotlightClick(spotlight: Spotlight) {
+        "".toString()
+    }
+
+    private fun onProductClick(product: Product) {
+        "".toString()
+    }
+
+    private fun onCashClick(cash: Cash) {
+        "".toString()
+    }
+
+    private fun getPresentation() = presentation.value ?: Presentation()
 
     sealed class Event : BaseViewModel.Event
 
@@ -75,8 +96,9 @@ class MainViewModel(
         val userName: String = "",
         val cashTitle: SpannableString = SpannableString(""),
         val cashBannerURL: String = "",
-        val spotlightsAdapter: SpotlightsAdapter = SpotlightsAdapter(listOf()),
-        val productsAdapter: ProductsAdapter = ProductsAdapter(listOf())
+        val onCashClick: () -> Unit = {},
+        val spotlightsAdapter: SpotlightsAdapter = SpotlightsAdapter(listOf()) {},
+        val productsAdapter: ProductsAdapter = ProductsAdapter(listOf()) {}
     )
 
 }
