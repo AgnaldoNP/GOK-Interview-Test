@@ -37,7 +37,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         inflater, layoutRes, container, false
     ).apply {
         viewDataBinding = this
-        bindViewModelToBinding()
+        observeViewModelLiveData()
         viewModel.observableEvents.observe(viewLifecycleOwner, observableViewModelEvents)
         initViewModel(savedInstanceState)
     }.root
@@ -47,7 +47,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     }
 
     open fun initViewModel(savedInstanceState: Bundle?) {}
-    abstract fun bindViewModelToBinding()
+    abstract fun observeViewModelLiveData()
     abstract val observableViewModelEvents: (event: BaseViewModel.Event) -> Unit
 
 }

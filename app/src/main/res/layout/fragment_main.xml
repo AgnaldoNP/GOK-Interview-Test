@@ -8,6 +8,10 @@
             name="vm"
             type="dev.agnaldo.gokinterviewtest.ui.main.MainViewModel" />
 
+        <variable
+            name="presentation"
+            type="dev.agnaldo.gokinterviewtest.ui.main.MainViewModel.Presentation" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -39,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/applicationIcon"
             app:layout_constraintTop_toTopOf="@id/applicationIcon"
-            app:textArg1="@{vm.presenter.userName}" />
+            app:textArg1="@{presentation.userName}" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
@@ -72,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="32dp"
                     android:layout_marginTop="32dp"
-                    android:text="@{vm.presenter.cashTitle}"
+                    android:text="@{presentation.cashTitle}"
                     android:textColor="#31263C"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -92,7 +96,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCash"
                     app:riv_corner_radius="10dp"
-                    app:src="@{vm.presenter.cashBannerURL}"
+                    app:src="@{presentation.cashBannerURL}"
                     tools:src="@mipmap/ic_launcher" />
 
                 <TextView

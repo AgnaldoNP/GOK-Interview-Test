@@ -9,7 +9,7 @@ import dev.agnaldo.gokinterviewtest.data.source.local.entity.CashDBEntity
 abstract class DaoCash : DaoBase<CashDBEntity> {
 
     @Query("SELECT * FROM '${CashDBEntity.TABLE_NAME}'")
-    abstract fun getAll(): LiveData<List<CashDBEntity>>
+    abstract fun getAll(): List<CashDBEntity>
 
     @Query("DELETE FROM '${CashDBEntity.TABLE_NAME}'")
     suspend abstract fun deleteAll()
@@ -20,14 +20,22 @@ abstract class DaoCash : DaoBase<CashDBEntity> {
             WHERE ${CashDBEntity.ID} = :id
         """
     )
-    suspend abstract fun getById(id: Long): CashDBEntity?
+    abstract fun getById(id: Long): LiveData<CashDBEntity?>
 
     @Query(
         """
-            SELECT COUNT(*) = 0 FROM '${CashDBEntity.TABLE_NAME}'
+            SELECT COUNT(*) FROM '${CashDBEntity.TABLE_NAME}'
             
         """
     )
-    abstract fun hasCashData(): Boolean
+    abstract fun countCashData(): Int
+
+    @Query(
+        """
+            SELECT * FROM '${CashDBEntity.TABLE_NAME}'
+            WHERE ${CashDBEntity.ID} = 1
+        """
+    )
+    abstract fun getFirst(): LiveData<CashDBEntity?>
 
 }

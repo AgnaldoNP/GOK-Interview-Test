@@ -9,11 +9,15 @@ import dev.agnaldo.gokinterviewtest.ui.custom.RoundCornersTransform
 
 @BindingAdapter("app:src")
 fun setImageView(imageView: ImageView, imageUrl: String) {
-    Picasso.get()
-        .load(imageUrl)
-        .placeholder(R.drawable.ic_launcher_background)
-        .error(R.drawable.ic_baseline_error_outline_24)
-        .into(imageView)
+    if(imageUrl.isNotEmpty()) {
+        Picasso.get()
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_launcher_background)
+            .error(R.drawable.ic_baseline_error_outline_24)
+            .into(imageView)
+    } else {
+        imageView.setImageResource(R.drawable.ic_baseline_error_outline_24)
+    }
 }
 
 @BindingAdapter(
