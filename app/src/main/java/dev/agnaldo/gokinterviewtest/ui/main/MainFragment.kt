@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import dev.agnaldo.gokinterviewtest.R
 import dev.agnaldo.gokinterviewtest.databinding.FragmentMainBinding
+import dev.agnaldo.gokinterviewtest.domian.entity.Cash
+import dev.agnaldo.gokinterviewtest.domian.entity.Product
+import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
 import dev.agnaldo.gokinterviewtest.ui.base.BaseFragment
 import dev.agnaldo.gokinterviewtest.ui.base.BaseViewModel
 import dev.agnaldo.gokinterviewtest.ui.custom.PagerMarginItemDecoration
-import dev.agnaldo.gokinterviewtest.ui.main.adapter.ProductsAdapter
-import dev.agnaldo.gokinterviewtest.ui.main.adapter.SpotlightsAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,6 +31,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     }
 
     override val observableViewModelEvents: (event: BaseViewModel.Event) -> Unit = { event ->
+        when (event) {
+            is MainViewModel.Event.OpenCashScreen -> openCashScreen(event.cash)
+            is MainViewModel.Event.OpenProductScreen -> openProductScreen(event.product)
+            is MainViewModel.Event.OpenSpotlightScreen -> openSpotlightScreen(event.spotlight)
+        }
     }
 
     override fun observeViewModelLiveData() {
@@ -38,13 +44,13 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             viewDataBinding.presentation = it
         }
         viewModel.getCashData().observe(viewLifecycleOwner) { cash ->
-            cash?.let { viewModel.updateCashInfo(it) }
+            cash?.let { viewModel.onCashLiveDataUpdate(it) }
         }
         viewModel.getSpotLights().observe(viewLifecycleOwner) { spotlights ->
-            viewModel.onSpotlightsChange(spotlights)
+            viewModel.onSpotlightsLiveDataUpdate(spotlights)
         }
         viewModel.getProducts().observe(viewLifecycleOwner) { products ->
-            viewModel.onProductsChange(products)
+            viewModel.onProductsLiveDataUpdate(products)
         }
     }
 
@@ -70,6 +76,18 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
                 )
             )
         }
+    }
+
+    private fun openSpotlightScreen(spotlight: Spotlight) {
+
+    }
+
+    private fun openProductScreen(product: Product) {
+
+    }
+
+    private fun openCashScreen(cash: Cash) {
+
     }
 
 }

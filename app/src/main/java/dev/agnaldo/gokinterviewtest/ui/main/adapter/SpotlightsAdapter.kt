@@ -9,8 +9,8 @@ import dev.agnaldo.gokinterviewtest.ui.base.BaseListAdapter
 import dev.agnaldo.gokinterviewtest.ui.main.adapter.viewholder.SpotlightViewHolder
 
 class SpotlightsAdapter(
-    private val spotlights: List<Spotlight>,
-    private val onSpotLightClick: (Spotlight) -> Unit
+    val spotlights: List<Spotlight>,
+    val onSpotLightClick: (Spotlight) -> Unit
 ) : BaseListAdapter<Spotlight, SpotlightViewHolder>(spotlights) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SpotlightViewHolder(

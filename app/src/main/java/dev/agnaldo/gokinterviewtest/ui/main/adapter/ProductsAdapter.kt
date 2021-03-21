@@ -9,8 +9,8 @@ import dev.agnaldo.gokinterviewtest.ui.base.BaseListAdapter
 import dev.agnaldo.gokinterviewtest.ui.main.adapter.viewholder.ProductViewHolder
 
 class ProductsAdapter(
-    private val products: List<Product>,
-    private val onProductClick: (Product) -> Unit
+    val products: List<Product>,
+    val onProductClick: (Product) -> Unit
 ) : BaseListAdapter<Product, ProductViewHolder>(products) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProductViewHolder(

@@ -1,12 +1,10 @@
 package dev.agnaldo.gokinterviewtest.ui.main
 
 import android.graphics.Color
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import dev.agnaldo.gokinterviewtest.common.SpannableUtils
 import dev.agnaldo.gokinterviewtest.domian.entity.Cash
 import dev.agnaldo.gokinterviewtest.domian.entity.Product
 import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
@@ -18,7 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val userCase: ProductsUseCase
+    private val userCase: ProductsUseCase,
+    private val spannableUtils: SpannableUtils
 ) : BaseViewModel() {
 
     private var _presentation = MutableLiveData<Presentation>()
@@ -36,25 +35,15 @@ class MainViewModel(
         _presentation.value = getPresentation().copy(userName = userCase.getUserName())
     }
 
-    fun updateCashInfo(cash: Cash) {
+    fun onCashLiveDataUpdate(cash: Cash) {
         _presentation.value = getPresentation().copy(
             cashBannerURL = cash.bannerURL,
-            cashTitle = SpannableString(cash.title).apply {
-                val split = cash.title.trim().split(" ")
-                if (split.count() > 1) {
-                    setSpan(
-                        ForegroundColorSpan(Color.GRAY),
-                        split[0].length,
-                        this.length,
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                    )
-                }
-            },
+            cashTitle = spannableUtils.colorizeSecondWordAndSoOn(cash.title, Color.GRAY),
             onCashClick = { onCashClick(cash) }
         )
     }
 
-    fun onSpotlightsChange(spotlights: List<Spotlight>) {
+    fun onSpotlightsLiveDataUpdate(spotlights: List<Spotlight>) {
         val adapter = SpotlightsAdapter(
             spotlights = spotlights,
             onSpotLightClick = { onSpotlightClick(it) }
@@ -65,7 +54,7 @@ class MainViewModel(
         )
     }
 
-    fun onProductsChange(products: List<Product>) {
+    fun onProductsLiveDataUpdate(products: List<Product>) {
         val adapter = ProductsAdapter(
             products = products,
             onProductClick = { onProductClick(it) }
@@ -77,24 +66,28 @@ class MainViewModel(
     }
 
     private fun onSpotlightClick(spotlight: Spotlight) {
-        "".toString()
+        postEventToView(Event.OpenSpotlightScreen(spotlight))
     }
 
     private fun onProductClick(product: Product) {
-        "".toString()
+        postEventToView(Event.OpenProductScreen(product))
     }
 
     private fun onCashClick(cash: Cash) {
-        "".toString()
+        postEventToView(Event.OpenCashScreen(cash))
     }
 
     private fun getPresentation() = presentation.value ?: Presentation()
 
-    sealed class Event : BaseViewModel.Event
+    sealed class Event : BaseViewModel.Event {
+        data class OpenCashScreen(val cash: Cash) : Event()
+        data class OpenProductScreen(val product: Product) : Event()
+        data class OpenSpotlightScreen(val spotlight: Spotlight) : Event()
+    }
 
     data class Presentation(
         val userName: String = "",
-        val cashTitle: SpannableString = SpannableString(""),
+        val cashTitle: CharSequence = "",
         val cashBannerURL: String = "",
         val onCashClick: () -> Unit = {},
         val spotlightsAdapter: SpotlightsAdapter = SpotlightsAdapter(listOf()) {},

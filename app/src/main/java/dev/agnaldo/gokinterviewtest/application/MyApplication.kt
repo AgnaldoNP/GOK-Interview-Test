@@ -1,6 +1,7 @@
 package dev.agnaldo.gokinterviewtest.application
 
 import android.app.Application
+import dev.agnaldo.gokinterviewtest.common.di.CommonModule.Companion.commonModule
 import dev.agnaldo.gokinterviewtest.data.repository.di.RepositoryModule.Companion.repositoryModule
 import dev.agnaldo.gokinterviewtest.data.source.local.di.DatabaseModule.Companion.databaseModule
 import dev.agnaldo.gokinterviewtest.data.source.remote.di.NetworkModule.Companion.networkModule
@@ -18,17 +19,20 @@ class MyApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApplication)
-            modules(
-                listOf(
-                    viewModelModule,
-                    repositoryModule,
-                    databaseModule,
-                    networkModule,
-                    domainModule
-                )
-            )
+            modules(getModules())
         }
 
+    }
+
+    companion object {
+        fun getModules() = listOf(
+            viewModelModule,
+            repositoryModule,
+            databaseModule,
+            networkModule,
+            domainModule,
+            commonModule
+        )
     }
 
 }
