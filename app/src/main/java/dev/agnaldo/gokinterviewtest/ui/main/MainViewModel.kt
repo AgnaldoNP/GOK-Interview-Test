@@ -8,8 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dev.agnaldo.gokinterviewtest.domian.entity.Cash
+import dev.agnaldo.gokinterviewtest.domian.entity.Product
+import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
 import dev.agnaldo.gokinterviewtest.domian.usecase.ProductsUseCase
 import dev.agnaldo.gokinterviewtest.ui.base.BaseViewModel
+import dev.agnaldo.gokinterviewtest.ui.main.adapter.ProductsAdapter
+import dev.agnaldo.gokinterviewtest.ui.main.adapter.SpotlightsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -51,12 +55,28 @@ class MainViewModel(
 
     private fun getPresentation() = presentation.value ?: Presentation()
 
+    fun onSpotlightsChange(spotlights: List<Spotlight>) {
+        val adapter = SpotlightsAdapter(spotlights)
+        _presentation.value = getPresentation().copy(
+            spotlightsAdapter = adapter
+        )
+    }
+
+    fun onProductsChange(products: List<Product>) {
+        val adapter = ProductsAdapter(products)
+        _presentation.value = getPresentation().copy(
+            productsAdapter = adapter
+        )
+    }
+
     sealed class Event : BaseViewModel.Event
 
     data class Presentation(
         val userName: String = "",
         val cashTitle: SpannableString = SpannableString(""),
-        val cashBannerURL: String = ""
+        val cashBannerURL: String = "",
+        val spotlightsAdapter: SpotlightsAdapter = SpotlightsAdapter(listOf()),
+        val productsAdapter: ProductsAdapter = ProductsAdapter(listOf())
     )
 
 }

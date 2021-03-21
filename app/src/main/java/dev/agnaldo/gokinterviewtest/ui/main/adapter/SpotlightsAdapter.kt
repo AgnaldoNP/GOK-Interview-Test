@@ -8,7 +8,7 @@ import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
 import dev.agnaldo.gokinterviewtest.ui.base.BaseListAdapter
 import dev.agnaldo.gokinterviewtest.ui.main.adapter.viewhoolder.SpotlightViewHolder
 
-class SpotlightAdapter(
+class SpotlightsAdapter(
     private val spotlights: List<Spotlight>
 ) : BaseListAdapter<Spotlight, SpotlightViewHolder>(spotlights) {
 

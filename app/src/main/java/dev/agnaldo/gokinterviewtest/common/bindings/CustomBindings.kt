@@ -3,13 +3,13 @@ package dev.agnaldo.gokinterviewtest.common.bindings
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import dev.agnaldo.gokinterviewtest.R
-import dev.agnaldo.gokinterviewtest.ui.custom.RoundCornersTransform
 
 @BindingAdapter("app:src")
 fun setImageView(imageView: ImageView, imageUrl: String) {
-    if(imageUrl.isNotEmpty()) {
+    if (imageUrl.isNotEmpty()) {
         Picasso.get()
             .load(imageUrl)
             .placeholder(R.drawable.ic_launcher_background)
@@ -36,4 +36,12 @@ fun setText(textView: TextView, arg1: String, arg2: String?, arg3: String?) {
     } else {
         textView.text = textView.text.toString().format(arg1)
     }
+}
+
+@BindingAdapter("app:adapter")
+fun setRecyclerViewAdapter(
+    recyclerView: RecyclerView,
+    adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+) {
+    recyclerView.adapter = adapter
 }

@@ -6,4 +6,9 @@
     <dimen name="default_horizontal_margin">16sp</dimen>
     <dimen name="default_vertical_margin">16sp</dimen>
     <dimen name="piece_of_card_visible_width">16sp</dimen>
+
+    <dimen name="page_adjacent_margin">50dp</dimen>
+
+    <dimen name="cash_image_height">100dp</dimen>
+    <dimen name="spotlight_image_height">150dp</dimen>
 </resources>

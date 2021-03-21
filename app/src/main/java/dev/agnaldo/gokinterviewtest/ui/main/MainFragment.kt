@@ -7,13 +7,11 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import dev.agnaldo.gokinterviewtest.R
 import dev.agnaldo.gokinterviewtest.databinding.FragmentMainBinding
-import dev.agnaldo.gokinterviewtest.domian.entity.Product
-import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
 import dev.agnaldo.gokinterviewtest.ui.base.BaseFragment
 import dev.agnaldo.gokinterviewtest.ui.base.BaseViewModel
 import dev.agnaldo.gokinterviewtest.ui.custom.PagerMarginItemDecoration
 import dev.agnaldo.gokinterviewtest.ui.main.adapter.ProductsAdapter
-import dev.agnaldo.gokinterviewtest.ui.main.adapter.SpotlightAdapter
+import dev.agnaldo.gokinterviewtest.ui.main.adapter.SpotlightsAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,11 +19,17 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override val viewModel: MainViewModel by viewModel()
     override val layoutRes = R.layout.fragment_main
-    override val observableViewModelEvents: (event: BaseViewModel.Event) -> Unit = {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViews()
+    }
+
+    override fun onBackPressed() {
+        requireActivity().finish()
+    }
+
+    override val observableViewModelEvents: (event: BaseViewModel.Event) -> Unit = { event ->
     }
 
     override fun observeViewModelLiveData() {
@@ -37,10 +41,10 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             cash?.let { viewModel.updateCashInfo(it) }
         }
         viewModel.getSpotLights().observe(viewLifecycleOwner) { spotlights ->
-            showSpotlights(spotlights)
+            viewModel.onSpotlightsChange(spotlights)
         }
         viewModel.getProducts().observe(viewLifecycleOwner) { products ->
-            showProducts(products)
+            viewModel.onProductsChange(products)
         }
     }
 
@@ -60,21 +64,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             addItemDecoration(
                 PagerMarginItemDecoration(
                     horizontalMargin = 0,
-                    adjacentVisibleSize = 150
+                    adjacentVisibleSize = requireContext().resources.getDimensionPixelSize(
+                        R.dimen.page_adjacent_margin
+                    )
                 )
             )
-        }
-    }
-
-    private fun showProducts(products: List<Product>) {
-        rvProducts?.apply {
-            adapter = ProductsAdapter(products)
-        }
-    }
-
-    private fun showSpotlights(spotlights: List<Spotlight>) {
-        rvSpotlights?.apply {
-            adapter = SpotlightAdapter(spotlights)
         }
     }
 

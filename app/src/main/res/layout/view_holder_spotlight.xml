@@ -26,14 +26,13 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="150dp"
+                android:layout_height="@dimen/spotlight_image_height"
                 android:scaleType="centerCrop"
                 app:src="@{spotlight.bannerURL}"
                 tools:src="@mipmap/ic_launcher" />
 
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
 
+    </LinearLayout>
 
 </layout>
