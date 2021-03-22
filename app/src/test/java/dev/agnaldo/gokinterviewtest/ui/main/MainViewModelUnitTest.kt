@@ -1,5 +1,6 @@
 package dev.agnaldo.gokinterviewtest.ui.main
 
+import androidx.lifecycle.liveData
 import com.google.common.truth.Truth.assertThat
 import dev.agnaldo.gokinterviewtest.TestSetup
 import dev.agnaldo.gokinterviewtest.common.SpannableUtils
@@ -7,7 +8,7 @@ import dev.agnaldo.gokinterviewtest.domian.entity.Cash
 import dev.agnaldo.gokinterviewtest.domian.entity.Product
 import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
 import dev.agnaldo.gokinterviewtest.domian.usecase.ProductsUseCase
-import dev.agnaldo.gokinterviewtest.setup.BaseViewModelUnitTest
+import dev.agnaldo.gokinterviewtest.setup.BaseUnitTest
 import dev.agnaldo.gokinterviewtest.ui.main.MainViewModel.Event
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -25,7 +26,7 @@ private const val USER_NAME = "Maria"
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-class MainViewModelUnitTest : BaseViewModelUnitTest() {
+class MainViewModelUnitTest : BaseUnitTest() {
 
     private val viewModel by inject<MainViewModel>()
     private val productsUseCase by inject<ProductsUseCase>()
@@ -41,7 +42,6 @@ class MainViewModelUnitTest : BaseViewModelUnitTest() {
             })
 
             every { productsUseCase.getUserName() }.returns(USER_NAME)
-            coEvery { productsUseCase.updateProducts() }.coAnswers { }
         }
     }
 

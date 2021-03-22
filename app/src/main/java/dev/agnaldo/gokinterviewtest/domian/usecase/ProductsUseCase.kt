@@ -9,9 +9,8 @@ import dev.agnaldo.gokinterviewtest.domian.entity.Spotlight
 class ProductsUseCase(
     val productsRepository: ProductsRepository
 ) {
-    suspend fun updateProducts() {
-        productsRepository.requestAndUpdateProductsFromApi()
-    }
+
+    suspend fun updateProducts() = productsRepository.requestAndUpdateProductsFromApi()
 
     fun getUserName() = "Maria"
 

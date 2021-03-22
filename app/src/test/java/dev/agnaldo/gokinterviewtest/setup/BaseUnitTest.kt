@@ -12,7 +12,7 @@ import org.koin.test.AutoCloseKoinTest
 
 @ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
-open class BaseViewModelUnitTest : AutoCloseKoinTest() {
+open class BaseUnitTest : AutoCloseKoinTest() {
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()

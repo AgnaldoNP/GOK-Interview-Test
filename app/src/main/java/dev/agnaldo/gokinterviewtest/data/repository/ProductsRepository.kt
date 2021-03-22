@@ -23,22 +23,22 @@ class ProductsRepository(
 ) {
 
     suspend fun requestAndUpdateProductsFromApi() {
-        val productsResponse = productsApi.getProducts()
+        try {
+            val productsResponse = productsApi.getProducts()
+            productsResponse.cash.toDBEntity().let {
+                daoCash.insert(it.apply { id = 1 })
+            }
 
-        productsResponse.cash.toDBEntity().let {
-            daoCash.insert(it.apply {
-                if (daoCash.countCashData() > 0) {
-                    id = 1
-                }
-            })
-        }
+            productsResponse.spotlights.toDBEntities().let {
+                daoSpotlight.insert(it)
+            }
 
-        productsResponse.spotlights.toDBEntities().let {
-            daoSpotlight.insert(it)
-        }
-
-        productsResponse.products.toDBEntities().let {
-            daoProduct.insert(it)
+            productsResponse.products.toDBEntities().let {
+                daoProduct.insert(it)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            //TODO improve notify error
         }
     }
 

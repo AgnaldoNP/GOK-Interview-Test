@@ -19,6 +19,12 @@ open class SpotlightDBEntity(
     val description: String,
 ) : RoomBaseEntity() {
 
+    override fun equals(other: Any?) = other is SpotlightDBEntity &&
+            other.name == name &&
+            other.bannerURL == bannerURL &&
+            other.description == description
+
+
     companion object {
         const val TABLE_NAME = "spotlight"
 

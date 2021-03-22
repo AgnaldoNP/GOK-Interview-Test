@@ -19,6 +19,12 @@ open class ProductDBEntity(
     val description: String,
 ) : RoomBaseEntity() {
 
+    override fun equals(other: Any?) = other is ProductDBEntity &&
+            other.name == name &&
+            other.imageURL == imageURL &&
+            other.description == description
+
+
     companion object {
         const val TABLE_NAME = "product"
 

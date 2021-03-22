@@ -15,6 +15,11 @@ open class CashDBEntity(
     val description: String,
 ) : RoomBaseEntity() {
 
+    override fun equals(other: Any?) = other is CashDBEntity &&
+            other.title == title &&
+            other.bannerURL == bannerURL &&
+            other.description == description
+
     companion object {
         const val TABLE_NAME = "cash"
 
