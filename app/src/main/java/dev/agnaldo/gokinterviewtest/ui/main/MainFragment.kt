@@ -2,6 +2,7 @@ package dev.agnaldo.gokinterviewtest.ui.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -79,15 +80,27 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     }
 
     private fun openSpotlightScreen(spotlight: Spotlight) {
-
+        findNavController().navigate(
+            MainFragmentDirections.actionGoToSpotlightFragment(
+                spotlight = spotlight
+            )
+        )
     }
 
     private fun openProductScreen(product: Product) {
-
+        findNavController().navigate(
+            MainFragmentDirections.actionGoToProductFragment(
+                product = product
+            )
+        )
     }
 
     private fun openCashScreen(cash: Cash) {
-
+        findNavController().navigate(
+            MainFragmentDirections.actionGoToCashFragment(
+                cash = cash
+            )
+        )
     }
 
 }

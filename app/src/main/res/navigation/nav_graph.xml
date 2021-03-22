@@ -10,7 +10,64 @@
         android:name="dev.agnaldo.gokinterviewtest.ui.main.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_go_to_cash_fragment"
+            app:destination="@id/cash_fragment"
+            app:enterAnim="@transition/anim_right_to_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@transition/anim_left_to_right"
+            app:popUpTo="@id/cash_fragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_go_to_product_fragment"
+            app:destination="@id/product_fragment"
+            app:enterAnim="@transition/anim_right_to_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@transition/anim_left_to_right"
+            app:popUpTo="@id/product_fragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_go_to_spotlight_fragment"
+            app:destination="@id/spotlight_fragment"
+            app:enterAnim="@transition/anim_right_to_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@transition/anim_left_to_right"
+            app:popUpTo="@id/spotlight_fragment"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
+    <fragment
+        android:id="@+id/cash_fragment"
+        android:name="dev.agnaldo.gokinterviewtest.ui.product.ProductFragment"
+        android:label="cash_fragment"
+        tools:layout="@layout/fragment_cash">
+        <argument
+            android:name="cash"
+            app:argType="dev.agnaldo.gokinterviewtest.domian.entity.Cash" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/product_fragment"
+        android:name="dev.agnaldo.gokinterviewtest.ui.product.ProductFragment"
+        android:label="product_fragment"
+        tools:layout="@layout/fragment_product">
+        <argument
+            android:name="product"
+            app:argType="dev.agnaldo.gokinterviewtest.domian.entity.Product" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/spotlight_fragment"
+        android:name="dev.agnaldo.gokinterviewtest.ui.product.ProductFragment"
+        android:label="product_spotlight"
+        tools:layout="@layout/fragment_spotlight">
+        <argument
+            android:name="spotlight"
+            app:argType="dev.agnaldo.gokinterviewtest.domian.entity.Spotlight" />
+    </fragment>
 
 </navigation>
